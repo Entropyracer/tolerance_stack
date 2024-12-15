@@ -1,23 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tolerance Stack Analysis Tool</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Title Section -->
+    <h1>Tolerance Stack Analysis Tool</h1>
+    <p id="timestamp">Last Updated: 12/13/2024 9:18 PM</p>
+
+    <!-- Table Section with Wrapper for Scrolling -->
+    <div class="table-wrapper">
+        <table id="tolerance-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Feature Description</th>
+                    <th>Direction</th>
+                    <th>Displacement (mm)</th>
+                    <th>Symmetrical Tolerance +/- (mm)</th>
+                    <th>Distribution</th>
+                    <th>Accumulated Displacement (mm)</th>
+                    <th>Accumulated Symmetrical Tolerance +/- (mm)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Default Row 0 (Non-editable) -->
+                <tr>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="accumulated-displacement">0.000</td>
+                    <td class="accumulated-tolerance">0.000</td>
+                    <td></td>
+                </tr>
+                <!-- Default First Row -->
+                <tr>
+                    <td>1</td>
+                    <td><input type="text" value="Feature A"></td>
+                    <td>
+                        <select>
+                            <option value="+">+</option>
+                            <option value="-">-</option>
+                        </select>
+                    </td>
+                    <td><input type="number" value="0.000" step="0.001"></td>
+                    <td><input type="number" value="0.000" step="0.001"></td>
+                    <td>
+                        <select>
+                            <option value="Normal">Normal</option>
+                            <option value="Uniform">Uniform</option>
+                        </select>
+                    </td>
+                    <td class="accumulated-displacement">0.000</td>
+                    <td class="accumulated-tolerance">0.000</td>
+                    <td>
+                        <button class="move-up" title="Move Up">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+                                <path d="M12 4l8 8h-16z" fill="black"/>
+                            </svg>
+                        </button>
+                        <button class="move-down" title="Move Down">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+                                <path d="M12 20l-8-8h16z" fill="black"/>
+                            </svg>
+                        </button>
+                        <button class="edit-row" title="Edit">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+                                    <path d="M21.7 2.3a1 1 0 0 0-1.4 0l-14 14V21h4.7l14-14a1 1 0 0 0 0-1.4l-3.3-3.3zm-14.7 14V19h2.7L20.4 7.4l-2.7-2.7L7 16.3zM19.7 4.7L17 2 18.4.6 21 3.3 19.7 4.7z" fill="black"/>
+                            </svg>
+                        </button>
+                        <button class="delete-row" title="Delete">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+                                <path d="M5 6h14l-1.4 14H6.4L5 6zm5-2h4v-2h-4v2zm7-2v2H7V2h2V0h6v2h2z" fill="black"/>
+                            </svg>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="6" style="text-align: right;">Resulting Tolerance Stack</td>
+                    <td id="total-displacement">0.000</td>
+                    <td id="total-tolerance">0.000</td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <!-- Buttons Below the Table -->
+    <div class="controls-below">
+        <button id="add-row">Add Feature Row</button>
+        <button id="save-pdf">Save as PDF</button>
+        <button id="reset-table">Reset</button>
+    </div>
+
+    <!-- JavaScript for Table Functionality -->
+    <script src="script.js"></script>
+</body>
 </html>
